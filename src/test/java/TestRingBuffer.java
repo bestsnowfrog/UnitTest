@@ -126,4 +126,41 @@ public class TestRingBuffer {
         Assert.assertEquals(size, overfull_buf.getSize());
     }
 
+
+    @Test
+    public void iterator_empty() {
+        for (int i: empty_buf) {
+            Assert.assertEquals(0, i);
+        }
+    }
+
+    @Test
+    public void iterator_nonempty() {
+        int j = startElem;
+        for (int i: nonempty_buf) {
+            Assert.assertEquals(i, j++);
+        }
+    }
+
+    @Test
+    public void iterator_full() {
+        int j = startElem;
+        for (int i: full_buf) {
+            Assert.assertEquals(i, j++);
+        }
+    }
+
+    @Test
+    public void iterator_overfull() {
+        int j = endElem - capacity + startElem;
+        for (int i: overfull_buf) {
+            Assert.assertEquals(i, j++);
+        }
+    }
+
+    @Test
+    public void iterator_remove() {
+        nonempty_buf.iterator().remove();
+    }
+
 }
